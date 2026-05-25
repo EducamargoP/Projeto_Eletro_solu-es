@@ -1,0 +1,412 @@
+/* ==========================================================================
+   1. REGRAS GERAIS E GLOBAIS
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Libertinus Mono", monospace;
+}
+
+body {
+  background: #1E2A38;
+  color: white; /* Centraliza a cor padrão do texto do site */
+}
+
+p {
+  color: white;
+}
+
+/* ==========================================================================
+   2. HEADER & NAVEGAÇÃO
+   ========================================================================== */
+header {
+  background-color: black;
+  width: 100%;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Melhor que center para distribuir logo/menu/social */
+  padding: 10px 20px;
+  position: relative;
+  z-index: 10; /* Reduzido de 100000 */
+}
+
+.logo {
+  width: 30%;
+}
+
+.logo img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  display: block;
+}
+
+.menu {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.menu nav {
+  display: flex;
+  gap: 20px; /* Maneira moderna de dar espaçamento entre links */
+}
+
+.menu nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+  position: relative;
+  padding: 5px 10px;
+}
+
+.menu nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu nav a::after {
+  content: " ";
+  width: 0;
+  height: 4px;
+  background: #00AEEF;
+  position: absolute;
+  bottom: 0; /* Ajustado de top para bottom para alinhar visualmente abaixo do texto */
+  left: 0;
+  transition: width 2s ease;
+}
+
+.menu nav a:hover::after {
+  width: 70%; /* O efeito preenche toda a extensão do link de forma fluida */
+}
+
+.social {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.social button {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  background: #00AEEF;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background 0.2s;
+}
+
+.social button:hover {
+  background: #008cc0;
+}
+
+.social button i {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   3. SEÇÃO PRINCIPAL (SERVIÇOS / BANNER)
+   ========================================================================== */
+.container-site {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* Banner com slider */
+.banner {
+  width: 50%;
+  position: relative;
+  border-radius: 40px; /* Reduzido de 75px para não distorcer imagens quadradas */
+  overflow: hidden;
+}
+
+.slider-container {
+  display: flex;
+  width: 100%;
+}
+
+.slider-box {
+  width: 100%;
+  flex-shrink: 0;
+  display: none; /* Controlado via JS (.ativo) */
+}
+
+.slider-box.ativo {
+  display: block;
+}
+
+.slider-box img {
+  width: 100%;
+  height: 400px; /* Altura fixa sugerida para manter uniformidade no slider */
+  object-fit: cover;
+}
+
+/* Estilos das setas do Slider */
+.setas {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  pointer-events: none; /* Evita que a div bloqueie cliques na imagem */
+}
+
+.setas button {
+  width: 40px;
+  height: 40px;
+  background: rgba(116, 116, 116, 0.7); /* Leve transparência fica mais elegante */
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  pointer-events: auto; /* Reativa o clique estritamente nos botões */
+  transition: background 0.2s;
+}
+
+.setas button:hover { /* Corrigido de .seta para .setas */
+  background-color: #00AEEF;
+}
+
+/* Texto ao lado */
+.banner-texto {
+  width: 50%;
+  font-size: 18px;
+  line-height: 1.6;
+  color: white;
+  text-align: left; /* Justify quebra muito no mobile, left é mais seguro */
+  opacity: 0;
+  animation: aparecer 1.5s ease forwards; /* Reduzido de 3s para uma experiência mais ágil */
+  animation-delay: 0.5s;
+}
+
+@keyframes aparecer {
+  to { opacity: 1; }
+}
+
+.banner-texto p i {
+  color: #00AEEF;
+}
+
+/* ==========================================================================
+   4. ESPECIALIDADES / SEÇÃO SOBRE
+   ========================================================================== */
+.servico {
+  padding: 60px 4%; 
+}
+
+h2 {
+  font-size: 36px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.3); /* Aumentado um pouco o contraste para acessibilidade */
+  text-align: center;
+}
+
+span {
+  color: #00AEEF;
+}
+
+.especialidade-box {
+  background: rgba(255, 255, 255, 0.03); /* Adicionado um fundo sutil para destacar o card */
+  height: 300px;
+  width: 50%;
+  color: white;
+  padding: 40px;
+  border-radius: 24px;
+  margin-top: 30px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.especialidade-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
+}
+
+.especialidade-box i {
+  font-size: 50px;
+  color: #00AEEF;
+}
+
+.especialidade-box h3 {
+  font-size: 24px;
+  margin: 15px 0;
+}
+
+/* Seção Sobre */
+.sobre {
+  width: 90%;
+  max-width: 1080px;
+  margin: 40px auto;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.img-sobre {
+  width: 50%;
+}
+
+.img-sobre img {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  filter: brightness(80%);
+  display: block;
+}
+
+.sobre-txt {
+  width: 50%;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ==========================================================================
+   5. FOOTER (RODAPÉ)
+   ========================================================================== */
+.linha {
+  margin-top: 50px;
+  border: 0;
+  border-top: 1px solid rgba(116, 116, 116, 0.2);
+}
+
+.menu-rodape {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.menu-rodape a {
+  text-decoration: none;
+  margin: 0 15px;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+
+.menu-rodape a:hover {
+  background: rgba(116, 116, 116, 0.2);
+  color: #00AEEF;
+}
+
+.menu-rodape-txt {
+  margin: 20px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+
+/* ==========================================================================
+   6. MEDIA QUERIES (RESPONSIVIDADE)
+   ========================================================================== */
+
+/* Telas até Tablets (768px) */
+@media (max-width: 768px) {
+  .menu, .menu-rodape, 
+  .container > .social {
+    display: none !important;
+  }
+  .logo img {
+    max-width: 180px;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    display: flex;
+  }
+  /* Transforma o layout do Banner e do Sobre em uma coluna única (empilhados) */
+  .container-site .sobre-conteudo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+  }
+  .especialidade-box{
+    width: 95%;
+  }
+  /* Faz com que os blocos de imagem e texto ocupem a largura total no mobile */
+  .banner, .banner-texto .img-sobre .sobre-txt {
+    width: 95%;
+    
+  }
+  .slider-box img {
+    width: 95%;
+    height: 250px;
+    border-radius: 90px;
+  }
+  .img-sobre img {
+    border-radius: 20px;
+  }
+
+  h2 {
+    font-size: 26px;
+    padding: 0 10px;
+  }
+  
+  .container-site, .sobre {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .banner, .banner-texto, .img-sobre, .sobre-txt {
+    width: 100%;
+  }
+
+  .slider-box img {
+    height: 250px; /* Diminui o tamanho do slider no mobile */
+    border-radius: 20px;
+  }
+
+  .img-sobre img {
+    border-radius: 20px;
+  }
+
+  .especialidade-box {
+    padding: 25px;
+    border-radius: 20px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+  
+  .social {
+    margin-left: 50px;
+    display: flex;
+    font-size: 40px;
+  }
+  
+}
+
+/* Telas muito pequenas (Celulares antigos/pequenos) */
+@media (max-width: 420px) {
+  .social {
+    display: none; /* Esconde as redes sociais apenas em telas criticamente pequenas */
+  }
+}
