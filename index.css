@@ -320,7 +320,7 @@ span {
 /* Telas até Tablets (768px) */
 @media (max-width: 768px) {
   .menu, .menu-rodape, 
-  .container > .social {
+  .container  {
     display: none !important;
   }
   .logo img {
@@ -405,8 +405,3 @@ span {
 }
 
 /* Telas muito pequenas (Celulares antigos/pequenos) */
-@media (max-width: 420px) {
-  .social {
-    display: none; /* Esconde as redes sociais apenas em telas criticamente pequenas */
-  }
-}
